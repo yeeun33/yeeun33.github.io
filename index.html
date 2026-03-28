@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나눔의교회</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="namun-church.css">
+</head>
+<body>
+
+
+<!-- ================================================================
+     HEADER
+================================================================ -->
+<header>
+    <a class="logo" href="#" onclick="showHome(); return false;">
+        <img src="images/logo.png" alt="나눔의교회 로고" class="logo-img">
+    </a>
+    <nav>
+        <ul>
+            <li data-section="intro">
+                <a href="#" onclick="showSection('intro'); return false;">교회소개</a>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="showSub('intro','pastor'); return false;">담임목사</a></li>
+                    <li><a href="#" onclick="showSub('intro','interior'); return false;">교회내부</a></li>
+                    <li><a href="#" onclick="showSub('intro','contact'); return false;">교회연락</a></li>
+                </ul>
+            </li>
+            <li data-section="worship">
+                <a href="#" onclick="showSection('worship'); return false;">예배 안내</a>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="showSub('worship','schedule'); return false;">예배시간</a></li>
+                    <li><a href="#" onclick="showSub('worship','directions'); return false;">오시는길</a></li>
+                </ul>
+            </li>
+            <li data-section="education">
+                <a href="#" onclick="showSection('education'); return false;">교육부서</a>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="showSub('education','elementary'); return false;">유초등부</a></li>
+                    <li><a href="#" onclick="showSub('education','middle'); return false;">중고등부</a></li>
+                    <li><a href="#" onclick="showSub('education','youth'); return false;">청년부</a></li>
+                </ul>
+            </li>
+            <li data-section="mission">
+                <a href="#" onclick="showSection('mission'); return false;">해외선교</a>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="showSub('mission','malinawa'); return false;">말린아와/산소망교회</a></li>
+                    <li><a href="#" onclick="showSub('mission','lifesharing'); return false;">생명나눔교회</a></li>
+                    <li><a href="#" onclick="showSub('mission','news'); return false;">선교소식</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <button class="hamburger" onclick="toggleMobileNav()" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+
+<!-- ================================================================
+     MOBILE NAV
+================================================================ -->
+<div id="mobile-nav" role="dialog" aria-label="모바일 메뉴">
+    <ul class="m-nav-list">
+        <li>
+            <a href="#" class="m-parent">교회소개 <span class="m-arrow">▾</span></a>
+            <ul class="m-dropdown">
+                <li><a href="#" onclick="showSub('intro','pastor'); return false;">담임목사</a></li>
+                <li><a href="#" onclick="showSub('intro','interior'); return false;">교회내부</a></li>
+                <li><a href="#" onclick="showSub('intro','contact'); return false;">교회연락</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="m-parent">예배 안내 <span class="m-arrow">▾</span></a>
+            <ul class="m-dropdown">
+                <li><a href="#" onclick="showSub('worship','schedule'); return false;">예배시간</a></li>
+                <li><a href="#" onclick="showSub('worship','directions'); return false;">오시는길</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="m-parent">교육부서 <span class="m-arrow">▾</span></a>
+            <ul class="m-dropdown">
+                <li><a href="#" onclick="showSub('education','elementary'); return false;">유초등부</a></li>
+                <li><a href="#" onclick="showSub('education','middle'); return false;">중고등부</a></li>
+                <li><a href="#" onclick="showSub('education','youth'); return false;">청년부</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="m-parent">해외선교 <span class="m-arrow">▾</span></a>
+            <ul class="m-dropdown">
+                <li><a href="#" onclick="showSub('mission','malinawa'); return false;">말린아와/산소망교회</a></li>
+                <li><a href="#" onclick="showSub('mission','lifesharing'); return false;">생명나눔교회</a></li>
+                <li><a href="#" onclick="showSub('mission','support'); return false;">1대1후원</a></li>
+                <li><a href="#" onclick="showSub('mission','news'); return false;">선교소식</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+<!-- ================================================================
+     HOME
+================================================================ -->
+<div id="home">
+    <section id="hero">
+        <div class="slide active" style="background-image: url('images/hero-background.jpg')"></div>
+        <div class="slide" style="background-image: url('images/hero-background2.jpg')"></div>
+        <div class="slide" style="background-image: url('images/hero-background3.jpg')"></div>
+        <div class="slide" style="background-image: url('images/hero-background4.jpg')"></div>
+        <div class="slide" style="background-image: url('images/hero-background5.jpg')"></div>
+        <div class="hero-dots">
+            <span class="dot active" onclick="goSlide(0)"></span>
+            <span class="dot" onclick="goSlide(1)"></span>
+            <span class="dot" onclick="goSlide(2)"></span>
+            <span class="dot" onclick="goSlide(3)"></span>
+            <span class="dot" onclick="goSlide(4)"></span>
+        </div>
+        <div class="hero-scroll" onclick="document.getElementById('home-welcome').scrollIntoView({behavior:'smooth'})">
+            <span>↓</span>
+        </div>
+    </section>
+
+    <section id="home-welcome">
+        <h2>나눔의교회에 오신 것을 환영합니다</h2>
+        <p>하나님의 사랑으로 나누고, 이웃을 섬기며, 세상 끝까지 복음을 전하는 교회입니다.</p>
+        <div class="home-cards">
+            <div class="home-card" onclick="showSection('worship')">
+                <div class="home-card-icon">🙏</div>
+                <h3>예배 안내</h3>
+                <p>주일 오전예배 10:40 AM</p>
+            </div>
+            <div class="home-card" onclick="showSection('intro')">
+                <div class="home-card-icon">⛪</div>
+                <h3>교회 소개</h3>
+                <p>담임목사 및 교회 연락처</p>
+            </div>
+            <div class="home-card" onclick="showSection('education')">
+                <div class="home-card-icon">📚</div>
+                <h3>교육부서</h3>
+                <p>유초등부 · 중고등부 · 청년부</p>
+            </div>
+            <div class="home-card" onclick="showSection('mission')">
+                <div class="home-card-icon">✈️</div>
+                <h3>해외선교</h3>
+                <p>세상 끝까지 복음을 전합니다</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><span>Copyright &copy; 2026 Namun Church.</span> All Rights Reserved.</p>
+    </footer>
+</div>
+
+
+<!-- ================================================================
+     ① 교회소개
+================================================================ -->
+<div id="section-intro" class="page-section">
+    <div class="section-hero">
+        <h2>교회소개</h2>
+        <p>나눔의교회를 소개합니다</p>
+        <div class="section-hero-bar"></div>
+    </div>
+    <div class="sub-nav">
+        <button id="tab-intro-pastor" class="active" onclick="showSub('intro','pastor')">담임목사</button>
+        <button id="tab-intro-interior" onclick="showSub('intro','interior')">교회내부</button>
+        <button id="tab-intro-contact" onclick="showSub('intro','contact')">교회연락</button>
+    </div>
+
+    <!-- 담임목사 -->
+    <div id="sub-intro-pastor" class="sub-content active">
+        <p class="section-title">담임목사</p>
+        <div class="section-bar"></div>
+        <div class="pastor-wrap">
+            <div class="pastor-card">
+                <div class="pastor-photo">
+                    <img src="images/pastor.png" alt="목사님 사진">
+                </div>
+                <div class="pastor-info-wrap">
+                    <p class="pastor-name">천기병 목사</p>
+                    <p class="pastor-role">나눔의교회 담임목사</p>
+                    <div class="pastor-divider"></div>
+                    <div class="info-row">
+                        <span class="info-label">학력</span>
+                        <span class="info-value">백석대학교 신학과 졸업</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">교단</span>
+                        <span class="info-value">대한예수교장로회 경기북노회</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 교회내부 -->
+    <div id="sub-intro-interior" class="sub-content">
+        <p class="section-title">교회내부</p>
+        <div class="section-bar"></div>
+        <div class="interior-grid">
+            <div class="interior-item">
+                <img src="images/interior-sanctuary1.jpg" alt="예배당" class="interior-photo">
+                <div class="interior-label">🙏 예배당</div>
+            </div>
+            <div class="interior-item">
+                <img src="images/interior-sanctuary2.jpg" alt="예배당" class="interior-photo">
+                <div class="interior-label">🙏 예배당</div>
+            </div>
+            <div class="interior-item">
+                <img src="images/interior-nursery.jpg" alt="유아실" class="interior-photo">
+                <div class="interior-label">👶 유아실</div>
+            </div>
+            <div class="interior-item">
+                <img src="images/interior-lobby.jpg" alt="로비" class="interior-photo">
+                <div class="interior-label">🚪 로비</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 교회연락 -->
+    <div id="sub-intro-contact" class="sub-content">
+        <p class="section-title">교회연락</p>
+        <div class="section-bar"></div>
+        <div class="contact-card">
+            <h3>연락처 안내</h3>
+            <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div class="contact-text">
+                    <strong>담임목사 전화</strong>
+                    <span>010-8912-4053</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div class="contact-text">
+                    <strong>사모님 전화</strong>
+                    <span>010-9114-4053</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">✉️</div>
+                <div class="contact-text">
+                    <strong>이메일</strong>
+                    <span>ckb4053@gmail.com</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-text">
+                    <strong>주소</strong>
+                    <span>경기도 고양시 일산동구 숲속마을로 42 8층</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer><p><span>Copyright &copy; 2026 Namun Church.</span> All Rights Reserved.</p></footer>
+</div>
+
+
+<!-- ================================================================
+     ② 예배 안내
+================================================================ -->
+<div id="section-worship" class="page-section">
+    <div class="section-hero">
+        <h2>예배 안내</h2>
+        <p>나눔의교회 예배 및 기도모임 시간 안내</p>
+        <div class="section-hero-bar"></div>
+    </div>
+    <div class="sub-nav">
+        <button id="tab-worship-schedule" class="active" onclick="showSub('worship','schedule')">예배시간</button>
+        <button id="tab-worship-directions" onclick="showSub('worship','directions')">오시는길</button>
+    </div>
+
+    <!-- 예배시간 -->
+    <div id="sub-worship-schedule" class="sub-content active">
+        <p class="section-title">예배시간</p>
+        <div class="section-bar"></div>
+        <div class="worship-grid">
+            <div class="worship-card">
+                <div class="w-day">주일</div>
+                <div class="w-name">오전예배</div>
+                <div class="w-time">10:40 <span>AM</span></div>
+            </div>
+            <div class="worship-card">
+                <div class="w-day">주일</div>
+                <div class="w-name">오후예배</div>
+                <div class="w-time">1:30 <span>PM</span></div>
+            </div>
+            <div class="worship-card">
+                <div class="w-day">주일</div>
+                <div class="w-name">유초등부예배</div>
+                <div class="w-time">9:00 <span>AM</span></div>
+            </div>
+            <div class="worship-card">
+                <div class="w-day">토요일</div>
+                <div class="w-name">중고등부예배</div>
+                <div class="w-time">3:00 <span>PM</span></div>
+            </div>
+            <div class="worship-card">
+                <div class="w-day">토요일</div>
+                <div class="w-name">청년부예배</div>
+                <div class="w-time">6:00 <span>PM</span></div>
+            </div>
+            <div class="worship-card">
+                <div class="w-day">수요일</div>
+                <div class="w-name">수요예배</div>
+                <div class="w-time">8:00 <span>PM</span></div>
+            </div>
+            <div class="worship-card">
+                <div class="w-day">금요일</div>
+                <div class="w-name">금요기도회</div>
+                <div class="w-time">9:00 <span>PM</span></div>
+            </div>
+            <div class="worship-card">
+                <div class="w-day">화 · 수요일</div>
+                <div class="w-name">기도회</div>
+                <div class="w-time">9:00 <span>PM</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 오시는길 -->
+    <div id="sub-worship-directions" class="sub-content">
+        <p class="section-title">오시는길</p>
+        <div class="section-bar"></div>
+        <div class="map-outer">
+            <div class="map-head">
+                <h3>나눔의교회에 오신 것을 환영합니다 🙏</h3>
+                <p>처음 오시는 분들도 아래 지도와 안내를 보고 편하게 찾아오실 수 있습니다.</p>
+            </div>
+            <div class="map-wrap">
+                <iframe
+                    src="https://map.naver.com/p/search/%EB%82%98%EB%88%94%EC%9D%98%EA%B5%90%ED%9A%8C"
+                    allowfullscreen loading="lazy">
+                </iframe>
+            </div>
+            <div class="addr-box">
+                <p>📍 <strong>주소:</strong> 경기도 고양시 일산동구 숲속마을로 42</p>
+                <p>🏢 <strong>상세주소:</strong> 8층 나눔의교회</p>
+            </div>
+        </div>
+    </div>
+
+    <footer><p><span>Copyright &copy; 2026 Namun Church.</span> All Rights Reserved.</p></footer>
+</div>
+
+
+<!-- ================================================================
+     ③ 교육부서
+================================================================ -->
+<div id="section-education" class="page-section">
+    <div class="section-hero">
+        <h2>교육부서</h2>
+        <p>다음 세대를 세워가는 나눔의교회</p>
+        <div class="section-hero-bar"></div>
+    </div>
+    <div class="sub-nav">
+        <button id="tab-education-elementary" class="active" onclick="showSub('education','elementary')">유초등부</button>
+        <button id="tab-education-middle" onclick="showSub('education','middle')">중고등부</button>
+        <button id="tab-education-youth" onclick="showSub('education','youth')">청년부</button>
+    </div>
+
+    <!-- 유초등부 -->
+    <div id="sub-education-elementary" class="sub-content active">
+        <p class="section-title">유초등부</p>
+        <div class="section-bar"></div>
+        <div class="dept-card">
+            <img src="images/young.png" alt="유초등부 사진" class="dept-photo">
+            <div class="dept-bottom">
+                <h3>유초등부</h3>
+                <div class="social-links"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 중고등부 -->
+    <div id="sub-education-middle" class="sub-content">
+        <p class="section-title">중고등부</p>
+        <div class="section-bar"></div>
+        <div class="dept-card">
+            <img src="images/middle.jpg" alt="중고등부 사진" class="dept-photo">
+            <div class="dept-bottom">
+                <h3>중고등부</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/nanum_student?igsh=d201bHVjMHVjZDA0" target="_blank" class="social-btn instagram-btn">📸 Instagram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 청년부 -->
+    <div id="sub-education-youth" class="sub-content">
+        <p class="section-title">청년부</p>
+        <div class="section-bar"></div>
+        <div class="dept-card">
+            <img src="images/youth.png" alt="청년부 사진" class="dept-photo">
+            <div class="dept-bottom">
+                <h3>청년부</h3>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/channel/UCZztmEKEyHuxUwxH3f3RGpQ" target="_blank" class="social-btn youtube-btn">▶ YouTube</a>
+                    <a href="https://instagram.com/INSTAGRAM_ID" target="_blank" class="social-btn instagram-btn">📸 Instagram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer><p><span>Copyright &copy; 2026 Namun Church.</span> All Rights Reserved.</p></footer>
+</div>
+
+
+<!-- ================================================================
+     ④ 해외선교
+================================================================ -->
+<div id="section-mission" class="page-section">
+    <div class="section-hero">
+        <h2>해외선교</h2>
+        <p>세상 끝까지 복음을 전합니다</p>
+        <div class="section-hero-bar"></div>
+    </div>
+    <div class="sub-nav">
+        <button id="tab-mission-malinawa" class="active" onclick="showSub('mission','malinawa')">말린아와/산소망교회</button>
+        <button id="tab-mission-lifesharing" onclick="showSub('mission','lifesharing')">생명나눔교회</button>
+        <button id="tab-mission-support" onclick="showSub('mission','support')">1대1후원</button>
+        <button id="tab-mission-news" onclick="showSub('mission','news')">선교소식</button>
+    </div>
+
+    <!-- 말린아와/산소망교회 -->
+    <div id="sub-mission-malinawa" class="sub-content active">
+        <p class="section-title">말린아와 / 산소망교회</p>
+        <div class="section-bar"></div>
+        <!-- 풀 히어로 사진 + 텍스트 오버레이 -->
+        <div class="malinawa-hero">
+            <img src="images/mission-malinawa1.jpg" alt="말린아와교회">
+            <div class="malinawa-hero-overlay">
+                <span class="malinawa-tag">Philippines Mission</span>
+                <h3>말린아와 · 산소망교회</h3>
+                <p>탁진선 선교사님, 임병호 선교사님과 함께<br>필리핀의 교회와 영혼들을 섬기고 있습니다.</p>
+            </div>
+        </div>
+        <!-- 3장 사진 가로 스크롤 -->
+        <div class="malinawa-strip">
+            <div class="malinawa-strip-item">
+                <img src="images/mission-malinawa2.jpg" alt="말린아와교회">
+            </div>
+            <div class="malinawa-strip-item">
+                <img src="images/mission-malinawa3.jpg" alt="말린아와교회">
+            </div>
+            <div class="malinawa-strip-item">
+                <img src="images/mission-malinawa4.jpg" alt="말린아와교회">
+            </div>
+        </div>
+        <!-- 활동 소개 카드 -->
+        <div class="malinawa-desc">
+            <div class="malinawa-desc-num">01</div>
+            <div class="malinawa-desc-body">
+                <h4>활동 소개</h4>
+                <p>매년 교회를 방문하여 어려운 가정을 돕고, 교회 사역을 지원하며, 성도들을 위한 물품 및 식량 나눔을 꾸준히 이어오고 있습니다.</p>
+                <p>우리의 섬김을 통해 필리핀의 교회와 영혼들이 예수님을 믿는 하나님의 자녀로 세워지도록 늘 기도하며 나아가고 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 생명나눔교회 -->
+    <div id="sub-mission-lifesharing" class="sub-content">
+        <p class="section-title">생명나눔교회</p>
+        <div class="section-bar"></div>
+        <div class="malinawa-hero">
+            <img src="images/mission-lifesharing1.png" alt="생명나눔교회">
+            <div class="malinawa-hero-overlay">
+                <span class="malinawa-tag">Philippines Mission</span>
+                <h3>생명나눔교회</h3>
+                <p>필리핀 산지에 세워진 교회,<br>주님의 복음이 그 땅 깊이 전해지도록 힘쓰고 있습니다.</p>
+            </div>
+        </div>
+        <div class="malinawa-strip">
+            <div class="malinawa-strip-item"><img src="images/mission-lifesharing2.jpg" alt="생명나눔교회"></div>
+            <div class="malinawa-strip-item"><img src="images/mission-lifesharing3.jpg" alt="생명나눔교회"></div>
+            <div class="malinawa-strip-item"><img src="images/mission-lifesharing4.jpg" alt="생명나눔교회"></div>
+        </div>
+        <div class="malinawa-desc">
+            <div class="malinawa-desc-num">02</div>
+            <div class="malinawa-desc-body">
+                <h4>활동 소개</h4>
+                <p>현지 목회자 가정과 긴밀히 소통하며 전심으로 섬기고 있으며, 매년 방문을 통해 그곳의 영혼들 곁에서 함께하고 있습니다.</p>
+                <p>현재 많은 이들이 생명나눔교회를 찾아 주님의 복음 앞에 한 걸음씩 가까워지고 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1대1후원 -->
+    <div id="sub-mission-support" class="sub-content">
+        <p class="section-title">1대1후원</p>
+        <div class="section-bar"></div>
+        <div class="malinawa-hero">
+            <img src="images/mission-support1.jpg" alt="1대1후원">
+            <div class="malinawa-hero-overlay">
+                <span class="malinawa-tag">1:1 Sponsorship</span>
+                <h3>1대1 후원</h3>
+                <p>나눔의교회 성도와 필리핀 영혼을 1대1로 연결하여<br>함께 믿음 안에서 성장해 가는 사역입니다.</p>
+            </div>
+        </div>
+        <div class="malinawa-strip">
+            <div class="malinawa-strip-item"><img src="images/mission-support2.jpg" alt="1대1후원"></div>
+            <div class="malinawa-strip-item"><img src="images/mission-support3.jpg" alt="1대1후원"></div>
+            <div class="malinawa-strip-item"><img src="images/mission-support4.jpg" alt="1대1후원"></div>
+        </div>
+        <div class="malinawa-desc">
+            <div class="malinawa-desc-num">03</div>
+            <div class="malinawa-desc-body">
+                <h4>활동 소개</h4>
+                <p>매달 적정 금액으로 아이들의 생활을 돕고, 후원자와 아이가 깊이 교제하며 필리핀 아이들이 교회에 잘 정착하고 믿음 안에서 자라갈 수 있도록 돕고 있습니다.</p>
+                <p>이 귀한 후원을 통해 나눔의교회 성도들 또한 주님의 은혜를 풍성히 경험하고 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 선교소식 게시판 -->
+    <div id="sub-mission-news" class="sub-content">
+        <p class="section-title">선교소식</p>
+        <div class="section-bar"></div>
+        <div class="board-top">
+            <p style="font-size:14px;color:#666;">연도별 선교 기록을 확인하세요</p>
+            <div class="year-filter">
+                <button class="year-btn active" onclick="filterYear('all',this)">전체</button>
+                <button class="year-btn" onclick="filterYear('2025',this)">2025</button>
+                <button class="year-btn" onclick="filterYear('2024',this)">2024</button>
+                <button class="year-btn" onclick="filterYear('2023',this)">2023</button>
+                <button class="year-btn" onclick="filterYear('2022',this)">2022</button>
+                <button class="year-btn" onclick="filterYear('2021',this)">2021</button>
+                <button class="year-btn" onclick="filterYear('2020',this)">2020</button>
+            </div>
+        </div>
+        <table class="board-table">
+            <thead>
+                <tr>
+                    <th style="width:56px">번호</th>
+                    <th style="width:72px">연도</th>
+                    <th>제목</th>
+                    <th style="width:100px">날짜</th>
+                </tr>
+            </thead>
+            <tbody id="mission-board">
+                <!--
+                    게시글 추가 예시:
+                    <tr data-year="2024">
+                        <td>1</td>
+                        <td>2024</td>
+                        <td><a href="#">2024 필리핀 선교 사진 및 영상</a></td>
+                        <td>2024.08.15</td>
+                    </tr>
+                -->
+                <tr>
+                    <td colspan="4" class="board-empty">
+                        등록된 선교소식이 없습니다.<br>
+                        위의 주석 안내를 따라 게시글을 추가해주세요 ✍️
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer><p><span>Copyright &copy; 2026 Namun Church.</span> All Rights Reserved.</p></footer>
+</div>
+
+
+<!-- ================================================================
+     JavaScript
+================================================================ -->
+<script>
+    let currentSection = 'home';
+    let revealObserver = null;
+
+    /* ─── Slideshow ─── */
+    let slideIndex = 0;
+    let slideTimer = null;
+
+    function goSlide(n) {
+        var slides = document.querySelectorAll('.slide');
+        var dots = document.querySelectorAll('.dot');
+        slides[slideIndex].classList.remove('active');
+        if (dots[slideIndex]) dots[slideIndex].classList.remove('active');
+        slideIndex = n;
+        slides[slideIndex].classList.add('active');
+        if (dots[slideIndex]) dots[slideIndex].classList.add('active');
+    }
+
+    function startSlideshow() {
+        var slides = document.querySelectorAll('.slide');
+        if (slides.length <= 1) return;
+        slideTimer = setInterval(function() {
+            goSlide((slideIndex + 1) % slides.length);
+        }, 5000);
+    }
+
+    /* ─── Nav Active State ─── */
+    function setNavActive(name) {
+        document.querySelectorAll('nav > ul > li').forEach(li => li.classList.remove('nav-active'));
+        if (name !== 'home') {
+            const li = document.querySelector('nav > ul > li[data-section="' + name + '"]');
+            if (li) li.classList.add('nav-active');
+        }
+    }
+
+    /* ─── Home ─── */
+    function showHome() {
+        document.getElementById('home').style.display = 'block';
+        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+        currentSection = 'home';
+        setNavActive('home');
+        closeMobileNav();
+        window.scrollTo(0, 0);
+    }
+
+    /* ─── Section ─── */
+    function showSection(name) {
+        document.getElementById('home').style.display = 'none';
+        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('section-' + name).classList.add('active');
+        currentSection = name;
+        setNavActive(name);
+        const firstBtn = document.querySelector('#section-' + name + ' .sub-nav button');
+        const firstContent = document.querySelector('#section-' + name + ' .sub-content');
+        if (firstBtn && firstContent) {
+            document.querySelectorAll('#section-' + name + ' .sub-nav button').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#section-' + name + ' .sub-content').forEach(c => c.classList.remove('active'));
+            firstBtn.classList.add('active');
+            firstContent.classList.add('active');
+        }
+        closeMobileNav();
+        window.scrollTo(0, 0);
+        requestAnimationFrame(observeReveal);
+    }
+
+    /* ─── Sub ─── */
+    function showSub(section, sub) {
+        if (currentSection !== section) showSection(section);
+        document.querySelectorAll('#section-' + section + ' .sub-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('#section-' + section + ' .sub-nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById('sub-' + section + '-' + sub).classList.add('active');
+        document.getElementById('tab-' + section + '-' + sub).classList.add('active');
+        closeMobileNav();
+        window.scrollTo(0, 0);
+        requestAnimationFrame(observeReveal);
+    }
+
+    /* ─── Year Filter ─── */
+    function filterYear(year, btn) {
+        document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('#mission-board tr[data-year]').forEach(row => {
+            row.style.display = (year === 'all' || row.dataset.year === year) ? '' : 'none';
+        });
+    }
+
+    /* ─── Mobile Nav ─── */
+    function toggleMobileNav() {
+        const nav = document.getElementById('mobile-nav');
+        const btn = document.querySelector('.hamburger');
+        const isOpen = nav.classList.contains('open');
+        nav.classList.toggle('open');
+        btn.classList.toggle('open');
+        document.body.style.overflow = isOpen ? '' : 'hidden';
+    }
+
+    function closeMobileNav() {
+        const nav = document.getElementById('mobile-nav');
+        const btn = document.querySelector('.hamburger');
+        nav.classList.remove('open');
+        btn.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    /* ─── Scroll Reveal ─── */
+    function observeReveal() {
+        if (revealObserver) revealObserver.disconnect();
+        revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.page-section.active .reveal').forEach(function(el, i) {
+            if (!el.classList.contains('visible')) {
+                el.style.transitionDelay = (i * 0.07) + 's';
+                revealObserver.observe(el);
+            }
+        });
+    }
+
+    /* ─── Init ─── */
+    document.addEventListener('DOMContentLoaded', function() {
+        // 슬라이드쇼 시작
+        startSlideshow();
+
+        // 스크롤 reveal 대상 요소에 클래스 추가
+        var revealSelectors = [
+            '.worship-card', '.contact-item', '.pastor-card',
+            '.interior-item', '.dept-card', '.mission-block',
+            '.board-table', '.map-outer'
+        ];
+        revealSelectors.forEach(function(sel) {
+            document.querySelectorAll(sel).forEach(function(el) {
+                el.classList.add('reveal');
+            });
+        });
+
+        // 모바일 드롭다운 아코디언
+        document.querySelectorAll('#mobile-nav .m-parent').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                var sub = this.closest('li').querySelector('.m-dropdown');
+                var arrow = this.querySelector('.m-arrow');
+                if (!sub) return;
+                var isOpen = sub.classList.contains('open');
+                document.querySelectorAll('#mobile-nav .m-dropdown').forEach(function(d) { d.classList.remove('open'); });
+                document.querySelectorAll('#mobile-nav .m-arrow').forEach(function(a) { a.classList.remove('open'); });
+                if (!isOpen) {
+                    sub.classList.add('open');
+                    if (arrow) arrow.classList.add('open');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

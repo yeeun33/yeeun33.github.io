@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://내도메인.com/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://내도메인.com/about.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <!-- 페이지마다 <url> 블록 하나씩 추가 -->
+</urlset>
+```
+
+---
+
+## 2단계. robots.txt 만들기
+
+같은 루트 폴더에 `robots.txt` 파일도 만들어 주세요.
+```
+User-agent: *
+Allow: /
+
+Sitemap: https://내도메인.com/sitemap.xml

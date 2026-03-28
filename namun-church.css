@@ -1,231 +1,598 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+    --color-primary:      #1a3a6b;
+    --color-primary-dark: #12182b;
+    --color-secondary:    #2d5a9e;
+    --color-accent:       #e8a020;
+    --color-bg-light:     #f8f9fa;
+    --color-bg-blue:      #f0f4ff;
+    --color-text:         #333;
+    --color-text-muted:   #666;
+    --color-border:       #e0e0e0;
+    --header-height:      72px;
+    --transition:         0.25s ease;
+    --radius:             12px;
+    --radius-lg:          16px;
+    --shadow:             0 4px 20px rgba(0,0,0,0.08);
+    --shadow-md:          0 8px 30px rgba(0,0,0,0.12);
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Noto Sans KR", sans-serif; color: #333; }
 
-        /* ===== HEADER ===== */
-        header {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.10);
-            padding: 0 48px;
-            display: flex; align-items: center; justify-content: space-between;
-            height: 72px;
-        }
-        .logo {
-            display: flex; align-items: center; gap: 12px;
-            text-decoration: none; cursor: pointer;
-        }
-        .logo-img {
-            width: 48px; height: 48px; border-radius: 50%;
-            background: #e8f0fe;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 10px; color: #888; text-align: center;
-            border: 2px dashed #aaa;
-            /* ======================================================
-               👉 [로고] church-logo.png 파일을 같은 폴더에 넣고
-                  아래처럼 img 태그로 바꿔주세요:
-               <img src="church-logo.png" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
-               ====================================================== */
-        }
-        .logo-text { font-size: 20px; font-weight: 700; color: #1a3a6b; letter-spacing: -0.5px; }
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Gmarket/GmarketSansBold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
 
-        nav ul { display: flex; list-style: none; }
-        nav > ul > li { position: relative; }
-        nav > ul > li > a {
-            display: block; padding: 0 22px; line-height: 72px;
-            text-decoration: none; font-size: 15px; font-weight: 600;
-            color: #1a3a6b; transition: color 0.2s; white-space: nowrap;
-        }
-        nav > ul > li > a:hover { color: #e8a020; }
-        .dropdown {
-            display: none; position: absolute; top: 72px; left: 0;
-            background: white; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            border-top: 3px solid #1a3a6b; min-width: 180px; z-index: 1001;
-        }
-        nav > ul > li:hover .dropdown { display: block; }
-        .dropdown li a {
-            display: block; padding: 13px 20px; text-decoration: none;
-            font-size: 14px; color: #444; transition: all 0.2s; white-space: nowrap;
-        }
-        .dropdown li a:hover { background: #f0f4ff; color: #1a3a6b; padding-left: 26px; }
+body {
+    font-family: 'GmarketSansBold', sans-serif;
+    color: var(--color-text);
+    font-size: 17px;
+    line-height: 1.6;
+}
 
-        /* ===== HERO ===== */
-        #hero {
-            height: 100vh;
-            /* ============================================================
-               👉 [배경사진] hero-background.jpg 를 같은 폴더에 넣어주세요
-                  교회 표어가 담긴 사진으로 교체됩니다.
-               ============================================================ */
-            background: #b0b8c8 url("hero-background.jpg") center/cover no-repeat;
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-        }
-        .hero-inner { position: relative; z-index: 1; text-align: center; color: white; }
-        .hero-inner h1 { font-size: 52px; font-weight: 700; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
-        .hero-inner p { font-size: 18px; margin-top: 14px; opacity: 0.85; }
+/* ===== HEADER ===== */
+header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.10);
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: var(--header-height);
+}
+.logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; cursor: pointer;
+}
+.logo-img {
+    height: 64px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-top: 20px;
+}
 
-        /* ===== PAGE SECTIONS ===== */
-        .page-section { display: none; min-height: calc(100vh - 72px); padding-top: 72px; }
-        .page-section.active { display: block; }
+nav ul { display: flex; list-style: none; }
+nav > ul > li { position: relative; }
+nav > ul > li > a {
+    display: block; padding: 0 22px; line-height: var(--header-height);
+    text-decoration: none; font-size: 17px; font-weight: 600;
+    color: var(--color-primary); transition: color var(--transition); white-space: nowrap;
+}
+nav > ul > li > a:hover,
+nav > ul > li.nav-active > a { color: var(--color-accent); }
 
-        .section-hero {
-            background: linear-gradient(135deg, #1a3a6b 0%, #2d5a9e 100%);
-            padding: 56px 40px; text-align: center; color: white;
-        }
-        .section-hero h2 { font-size: 34px; font-weight: 700; margin-bottom: 8px; }
-        .section-hero p { font-size: 15px; opacity: 0.78; }
+.dropdown {
+    display: none; position: absolute; top: var(--header-height); left: 0;
+    background: white; box-shadow: var(--shadow-md);
+    border-top: 3px solid var(--color-primary); min-width: 180px; z-index: 1001;
+}
+nav > ul > li:hover .dropdown { display: block; }
+.dropdown li a {
+    display: block; padding: 13px 20px; text-decoration: none;
+    font-size: 15px; color: #444; transition: all var(--transition); white-space: nowrap;
+}
+.dropdown li a:hover { background: var(--color-bg-blue); color: var(--color-primary); padding-left: 26px; }
 
-        .sub-nav {
-            display: flex; justify-content: center;
-            background: #f8f9fa; border-bottom: 1px solid #e0e0e0;
-        }
-        .sub-nav button {
-            padding: 16px 32px; border: none; background: none;
-            font-size: 14px; font-weight: 600; color: #777;
-            cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s;
-        }
-        .sub-nav button.active, .sub-nav button:hover { color: #1a3a6b; border-bottom-color: #1a3a6b; }
+/* ===== HAMBURGER ===== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px; height: 20px;
+    background: none; border: none;
+    cursor: pointer; padding: 0; z-index: 1100;
+}
+.hamburger span {
+    display: block; width: 100%; height: 2px;
+    background: var(--color-primary); border-radius: 2px;
+    transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-        .sub-content { display: none; padding: 56px 48px; max-width: 1100px; margin: 0 auto; }
-        .sub-content.active { display: block; }
+/* ===== MOBILE NAV ===== */
+#mobile-nav {
+    position: fixed;
+    top: var(--header-height); left: 0; right: 0; bottom: 0;
+    background: white;
+    z-index: 998;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    display: none;
+}
+#mobile-nav.open { transform: translateX(0); }
 
-        .section-title { font-size: 26px; font-weight: 700; color: #1a3a6b; margin-bottom: 8px; }
-        .section-bar { width: 46px; height: 4px; background: #e8a020; border-radius: 2px; margin-bottom: 36px; }
+.m-nav-list { list-style: none; padding: 8px 0; }
+.m-nav-list > li { border-bottom: 1px solid var(--color-border); }
+.m-parent {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 24px; text-decoration: none;
+    font-size: 17px; font-weight: 700; color: var(--color-primary);
+    cursor: pointer; user-select: none;
+}
+.m-parent.m-disabled { color: #aaa; cursor: default; }
+.m-arrow { font-size: 12px; transition: transform 0.25s ease; display: inline-block; }
+.m-arrow.open { transform: rotate(180deg); }
+.m-badge { font-size: 11px; background: #eee; color: #999; padding: 3px 8px; border-radius: 10px; }
+.m-dropdown {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: var(--color-bg-light);
+}
+.m-dropdown.open { max-height: 300px; }
+.m-dropdown li a {
+    display: block; padding: 14px 32px;
+    text-decoration: none; font-size: 15px;
+    color: #555; border-bottom: 1px solid #f0f0f0;
+    transition: color var(--transition), background var(--transition);
+}
+.m-dropdown li:last-child a { border-bottom: none; }
+.m-dropdown li a:hover { color: var(--color-primary); background: var(--color-bg-blue); }
 
-        /* ===== PASTOR ===== */
-        .pastor-card { display: flex; gap: 50px; align-items: flex-start; max-width: 820px; margin: 0 auto; }
-        .pastor-photo {
-            width: 220px; height: 280px; flex-shrink: 0;
-            background: #ebebeb; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            border: 3px dashed #bbb; font-size: 12px; color: #888;
-            text-align: center; padding: 12px; line-height: 1.7;
-            /* ============================================================
-               👉 [목사님 사진] pastor-photo.jpg 를 같은 폴더에 넣고
-                  아래처럼 img 태그로 바꿔주세요:
-               <img src="pastor-photo.jpg" style="width:220px;height:280px;border-radius:12px;object-fit:cover;">
-               ============================================================ */
-        }
-        .pastor-name { font-size: 28px; font-weight: 700; color: #1a3a6b; margin-bottom: 4px; }
-        .pastor-role { font-size: 15px; color: #e8a020; font-weight: 600; margin-bottom: 24px; }
-        .info-row { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
-        .info-label {
-            font-size: 12px; font-weight: 700; color: white;
-            background: #1a3a6b; padding: 5px 10px; border-radius: 4px;
-            white-space: nowrap; min-width: 46px; text-align: center; flex-shrink: 0;
-        }
-        .info-value { font-size: 15px; color: #444; padding-top: 3px; line-height: 1.6; }
+/* ===== HERO ===== */
+#hero {
+    height: 100vh;
+    background: #b0b8c8;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+}
+.slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    background-color: #b0b8c8;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+}
+.slide.active { opacity: 1; }
+.hero-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.38);
+    z-index: 1;
+}
 
-        /* ===== INTERIOR ===== */
-        .interior-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-        .interior-item { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
-        .interior-photo {
-            width: 100%; height: 240px;
-            background: #e4e4e4; border: 3px dashed #bbb;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; color: #888; text-align: center; line-height: 1.8;
-            /* ============================================================
-               👉 [교회내부 사진] 각 칸에 사진을 넣는 방법:
-                  이 div를 <img> 태그로 교체하세요:
-               <img src="interior-sanctuary.jpg" style="width:100%;height:240px;object-fit:cover;">
-               ============================================================ */
-        }
-        .interior-label { background: #1a3a6b; color: white; text-align: center; padding: 14px; font-size: 15px; font-weight: 700; letter-spacing: 1px; }
+@media (max-width: 768px) {
+    .hero-inner h1 { font-size: 48px; padding: 16px 32px; }
+}
 
-        /* ===== CONTACT ===== */
-        .contact-card { max-width: 600px; margin: 0 auto; background: #f8f9fa; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
-        .contact-card h3 { font-size: 20px; font-weight: 700; color: #1a3a6b; margin-bottom: 28px; text-align: center; }
-        .contact-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid #e0e0e0; }
-        .contact-icon { width: 44px; height: 44px; background: #1a3a6b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-        .contact-text strong { display: block; font-size: 12px; color: #888; margin-bottom: 2px; }
-        .contact-text span { font-size: 15px; color: #333; }
+@media (max-width: 768px) {
+    .hero-inner h1 { font-size: 52px; }
+}
 
-        /* ===== WORSHIP SCHEDULE ===== */
-        .worship-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px; }
-        .worship-card { background: white; border-radius: 12px; padding: 28px 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-top: 4px solid #1a3a6b; transition: transform 0.2s; }
-        .worship-card:hover { transform: translateY(-4px); }
-        .prayer-card { background: linear-gradient(135deg, #1a3a6b, #2d5a9e); border-radius: 12px; padding: 28px 20px; text-align: center; box-shadow: 0 4px 20px rgba(26,58,107,0.3); transition: transform 0.2s; }
-        .prayer-card:hover { transform: translateY(-4px); }
-        .w-day { font-size: 12px; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; color: #e8a020; }
-        .prayer-card .w-day { color: #ffd070; }
-        .w-name { font-size: 16px; font-weight: 700; color: #1a3a6b; margin-bottom: 12px; }
-        .prayer-card .w-name { color: white; }
-        .w-time { font-size: 26px; font-weight: 700; color: #222; }
-        .w-time span { font-size: 13px; color: #888; font-weight: 400; }
-        .prayer-card .w-time { color: white; }
-        .prayer-card .w-time span { color: rgba(255,255,255,0.65); }
+@media (max-width: 768px) {
+    .hero-inner { right: 16px; top: calc(var(--header-height) + 20px); padding: 20px 22px; }
+    .hero-inner h1 { font-size: 28px; }
+    .hero-inner p  { font-size: 13px; }
+}
+.hero-dots {
+    position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 3;
+}
+.dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(255,255,255,0.45); cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+.dot.active { background: white; transform: scale(1.25); }
+.hero-scroll {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 3; cursor: pointer;
+    animation: bounce 2s infinite;
+}
+.hero-scroll span {
+    font-size: 22px; color: rgba(255,255,255,0.7);
+}
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+}
 
-        /* ===== MAP ===== */
-        .map-outer { max-width: 900px; margin: 0 auto; }
-        .map-head { text-align: center; margin-bottom: 28px; }
-        .map-head h3 { font-size: 22px; font-weight: 700; color: #1a3a6b; margin-bottom: 8px; }
-        .map-head p { font-size: 15px; color: #666; line-height: 1.7; }
-        .map-wrap { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); margin-bottom: 20px; }
-        .map-wrap iframe { width: 100%; height: 400px; border: none; display: block; }
-        .addr-box { background: #f0f4ff; border-left: 4px solid #1a3a6b; border-radius: 8px; padding: 20px 24px; }
-        .addr-box p { font-size: 15px; color: #333; margin-bottom: 8px; }
-        .addr-box strong { color: #1a3a6b; }
+/* ===== HOME WELCOME ===== */
+#home-welcome {
+    padding: 80px 40px;
+    text-align: center;
+    background: white;
+}
+#home-welcome h2 {
+    font-size: 34px; font-weight: 700;
+    color: var(--color-primary); margin-bottom: 16px;
+}
+#home-welcome > p {
+    font-size: 17px; color: var(--color-text-muted);
+    max-width: 640px; margin: 0 auto 56px; line-height: 1.8;
+}
+.home-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; max-width: 1000px; margin: 0 auto;
+}
+.home-card {
+    background: var(--color-bg-light); border-radius: var(--radius-lg);
+    padding: 36px 24px; cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    border-top: 4px solid var(--color-primary);
+}
+.home-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    background: var(--color-bg-blue);
+}
+.home-card-icon { font-size: 36px; margin-bottom: 14px; }
+.home-card h3 { font-size: 18px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+.home-card p  { font-size: 14px; color: var(--color-text-muted); line-height: 1.6; }
 
-        /* ===== EDUCATION ===== */
-        .dept-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .dept-photo {
-            width: 100%; height: 300px;
-            background: #e4e4e4; border: 3px dashed #bbb;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; color: #888; text-align: center; line-height: 1.8;
-            /* ============================================================
-               👉 [부서 사진] 각 부서 사진 넣는 방법:
-                  이 div를 <img> 태그로 교체하세요:
-               <img src="dept-elementary.jpg" style="width:100%;height:300px;object-fit:cover;">
-               ============================================================ */
-        }
-        .dept-bottom { padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; }
-        .dept-bottom h3 { font-size: 22px; font-weight: 700; color: #1a3a6b; }
-        .social-links { display: flex; gap: 10px; }
-        .social-btn { padding: 8px 18px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; }
-        .instagram-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-        .youtube-btn { background: #FF0000; color: white; }
-        .social-btn:hover { opacity: 0.82; transform: translateY(-2px); }
+@media (max-width: 768px) {
+    .hero-inner h1 { font-size: 36px; }
+    .hero-inner p  { font-size: 16px; }
+    .home-cards { grid-template-columns: repeat(2, 1fr); }
+    #home-welcome { padding: 56px 20px; }
+    #home-welcome h2 { font-size: 26px; }
+}
 
-        /* ===== MISSION ===== */
-        .mission-block { display: flex; gap: 32px; align-items: flex-start; }
-        .mission-photo {
-            width: 340px; height: 240px; flex-shrink: 0;
-            background: #e4e4e4; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            border: 3px dashed #bbb; font-size: 12px; color: #888;
-            text-align: center; padding: 12px; line-height: 1.8;
-            /* ============================================================
-               👉 [선교 사진] mission-malinawa.jpg 또는 mission-lifesharing.jpg 를
-                  같은 폴더에 넣고 img 태그로 교체하세요.
-               ============================================================ */
-        }
-        .mission-text h3 { font-size: 20px; font-weight: 700; color: #1a3a6b; margin-bottom: 12px; }
-        .mission-text p { font-size: 15px; color: #555; line-height: 1.85; }
+/* ===== PAGE SECTIONS ===== */
+.page-section { display: none; min-height: calc(100vh - var(--header-height)); padding-top: var(--header-height); }
+.page-section.active {
+    display: block;
+    animation: sectionFadeIn 0.4s ease both;
+}
+@keyframes sectionFadeIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-        /* Board */
-        .board-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-        .year-filter { display: flex; gap: 8px; flex-wrap: wrap; }
-        .year-btn { padding: 6px 16px; border: 2px solid #1a3a6b; border-radius: 20px; background: white; color: #1a3a6b; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .year-btn.active, .year-btn:hover { background: #1a3a6b; color: white; }
-        .board-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .board-table th { background: #1a3a6b; color: white; padding: 14px 20px; font-size: 14px; font-weight: 600; text-align: left; }
-        .board-table td { padding: 14px 20px; font-size: 14px; color: #444; border-bottom: 1px solid #f0f0f0; }
-        .board-table tr:hover td { background: #f8f9ff; }
-        .board-empty { text-align: center; color: #aaa; padding: 40px; }
+.section-hero {
+    position: relative;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    padding: 68px 40px 60px;
+    text-align: center; color: white;
+    overflow: hidden;
+}
+/* 배경 장식 원 */
+.section-hero::before,
+.section-hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+}
+.section-hero::before {
+    width: 320px; height: 320px;
+    top: -80px; left: -60px;
+}
+.section-hero::after {
+    width: 220px; height: 220px;
+    bottom: -70px; right: -40px;
+}
+.section-hero h2 {
+    position: relative; z-index: 1;
+    font-size: 40px; font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.section-hero p {
+    position: relative; z-index: 1;
+    font-size: 17px; opacity: 0.82;
+    margin-bottom: 20px;
+}
+.section-hero-bar {
+    position: relative; z-index: 1;
+    display: inline-block;
+    width: 48px; height: 4px;
+    background: var(--color-accent);
+    border-radius: 2px;
+}
 
-        /* ===== FOOTER ===== */
-        footer { background: #12182b; color: #888; text-align: center; padding: 28px; font-size: 14px; }
-        footer span { color: #ccc; }
+@media (max-width: 768px) {
+    .section-hero h2 { font-size: 30px; }
+    .section-hero p  { font-size: 15px; }
+}
 
-        @media (max-width: 768px) {
-            header { padding: 0 16px; }
-            nav > ul > li > a { padding: 0 12px; font-size: 13px; }
-            .pastor-card { flex-direction: column; align-items: center; }
-            .interior-grid { grid-template-columns: 1fr; }
-            .worship-grid { grid-template-columns: repeat(2, 1fr); }
-            .mission-block { flex-direction: column; }
-            .mission-photo { width: 100%; }
-            .sub-content { padding: 36px 20px; }
-            .hero-inner h1 { font-size: 32px; }
-        }
+.sub-nav {
+    display: flex; justify-content: center;
+    background: var(--color-bg-light); border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+}
+.sub-nav button {
+    padding: 16px 32px; border: none; background: none;
+    font-size: 16px; font-weight: 600; color: #777;
+    cursor: pointer; border-bottom: 3px solid transparent; transition: all var(--transition);
+}
+.sub-nav button.active, .sub-nav button:hover { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+.sub-content { display: none; padding: 56px 48px; max-width: 1100px; margin: 0 auto; }
+.sub-content.active { display: block; }
+
+.section-title { font-size: 30px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+.section-bar { width: 46px; height: 4px; background: var(--color-accent); border-radius: 2px; margin-bottom: 36px; }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== PASTOR ===== */
+.pastor-wrap {
+    background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+    border-radius: 24px;
+    padding: 52px 56px;
+    max-width: 960px;
+    margin: 0 auto;
+    box-shadow: 0 8px 40px rgba(26,58,107,0.10);
+    border: 1px solid #e4eaf8;
+}
+.pastor-card { display: flex; gap: 60px; align-items: center; }
+.pastor-photo {
+    width: 360px; height: 440px; flex-shrink: 0;
+    background: #dde4f0; border-radius: 20px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 40px rgba(26,58,107,0.18);
+    font-size: 12px; color: #888;
+    text-align: center; padding: 12px; line-height: 1.7;
+}
+.pastor-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pastor-info-wrap { flex: 1; }
+.pastor-name { font-size: 36px; font-weight: 700; color: var(--color-primary); margin-bottom: 4px; }
+.pastor-role {
+    font-size: 16px; color: var(--color-accent); font-weight: 600;
+    margin-bottom: 6px; letter-spacing: 0.3px;
+}
+.pastor-divider {
+    width: 48px; height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 2px; margin-bottom: 28px;
+}
+.info-row { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+.info-label {
+    font-size: 13px; font-weight: 700; color: white;
+    background: var(--color-primary); padding: 6px 12px; border-radius: 6px;
+    white-space: nowrap; min-width: 50px; text-align: center; flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+.info-value { font-size: 16px; color: #444; padding-top: 4px; line-height: 1.7; }
+
+@media (max-width: 768px) {
+    .pastor-wrap { padding: 32px 20px; }
+    .pastor-card { flex-direction: column; align-items: center; gap: 32px; }
+    .pastor-photo { width: 100%; height: 320px; }
+    .pastor-name { font-size: 28px; }
+}
+
+/* ===== INTERIOR ===== */
+.interior-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.interior-item { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.interior-photo {
+    width: 100%; height: 240px;
+    object-fit: cover;
+    display: block;
+}
+.interior-label { background: var(--color-primary); color: white; text-align: center; padding: 14px; font-size: 17px; font-weight: 700; letter-spacing: 1px; }
+
+/* ===== CONTACT ===== */
+.contact-card { max-width: 600px; margin: 0 auto; background: var(--color-bg-light); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow); }
+.contact-card h3 { font-size: 22px; font-weight: 700; color: var(--color-primary); margin-bottom: 28px; text-align: center; }
+.contact-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--color-border); }
+.contact-icon { width: 44px; height: 44px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.contact-text strong { display: block; font-size: 13px; color: #888; margin-bottom: 2px; }
+.contact-text span { font-size: 16px; color: var(--color-text); }
+
+/* ===== WORSHIP SCHEDULE ===== */
+.worship-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px; }
+.worship-card {
+    background: white; border-radius: var(--radius); padding: 28px 20px; text-align: center;
+    box-shadow: var(--shadow); border-top: 4px solid var(--color-primary);
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.worship-card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    box-shadow: 0 12px 32px rgba(26,58,107,0.28);
+}
+.worship-card:hover .w-day  { color: #ffd070; }
+.worship-card:hover .w-name { color: white; }
+.worship-card:hover .w-time { color: white; }
+.worship-card:hover .w-time span { color: rgba(255,255,255,0.65); }
+.w-day { font-size: 13px; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; color: var(--color-accent); }
+.w-name { font-size: 18px; font-weight: 700; color: var(--color-primary); margin-bottom: 12px; }
+.w-time { font-size: 30px; font-weight: 700; color: #222; }
+.w-time span { font-size: 14px; color: #888; font-weight: 400; }
+
+/* ===== MAP ===== */
+.map-outer { max-width: 900px; margin: 0 auto; }
+.map-head { text-align: center; margin-bottom: 28px; }
+.map-head h3 { font-size: 24px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+.map-head p { font-size: 16px; color: var(--color-text-muted); line-height: 1.7; }
+.map-wrap { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: 20px; }
+.map-wrap iframe { width: 100%; height: 400px; border: none; display: block; }
+.addr-box { background: var(--color-bg-blue); border-left: 4px solid var(--color-primary); border-radius: 8px; padding: 20px 24px; }
+.addr-box p { font-size: 16px; color: var(--color-text); margin-bottom: 8px; }
+.addr-box strong { color: var(--color-primary); }
+
+/* ===== EDUCATION ===== */
+.dept-card { background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+.dept-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+}
+.dept-photo-portrait {
+    width: 100%; aspect-ratio: 3 / 4; max-height: 500px; object-fit: cover;
+    background: #e4e4e4; border: 3px dashed #bbb; border-radius: var(--radius);
+    display: block; font-size: 12px; color: #888; text-align: center; line-height: 1.8;
+}
+.dept-bottom { padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; }
+.dept-bottom h3 { font-size: 24px; font-weight: 700; color: var(--color-primary); }
+.social-links { display: flex; gap: 10px; }
+.social-btn { padding: 8px 18px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: 600; transition: all var(--transition); }
+.instagram-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+.youtube-btn { background: #FF0000; color: white; }
+.social-btn:hover { opacity: 0.82; transform: translateY(-2px); }
+
+/* ===== MISSION ===== */
+.mission-block { display: flex; gap: 32px; align-items: flex-start; }
+.mission-photo {
+    width: 340px; height: 240px; flex-shrink: 0;
+    background: #e4e4e4; border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    border: 3px dashed #bbb; font-size: 12px; color: #888;
+    text-align: center; padding: 12px; line-height: 1.8;
+}
+.mission-text h3 { font-size: 22px; font-weight: 700; color: var(--color-primary); margin-bottom: 12px; }
+.mission-text p { font-size: 16px; color: #555; line-height: 1.85; }
+
+/* ===== MALINAWA MODERN LAYOUT ===== */
+.malinawa-hero {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+}
+.malinawa-hero img {
+    width: 100%; height: 560px;
+    object-fit: cover; display: block;
+    transition: transform 0.6s ease;
+}
+.malinawa-hero:hover img { transform: scale(1.03); }
+.malinawa-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,20,50,0.82) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 40px 44px;
+}
+.malinawa-tag {
+    display: inline-block;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.malinawa-hero-overlay h3 {
+    font-size: 36px; font-weight: 700;
+    color: white; margin-bottom: 10px;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.malinawa-hero-overlay p {
+    font-size: 15px; color: rgba(255,255,255,0.82);
+    line-height: 1.7;
+}
+
+.malinawa-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+}
+.malinawa-strip-item {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.malinawa-strip-item img {
+    width: 100%; height: 180px;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+}
+.malinawa-strip-item:hover img { transform: scale(1.05); }
+
+.malinawa-desc {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    background: white;
+    border-radius: 16px;
+    padding: 32px 36px;
+    box-shadow: var(--shadow);
+    border: 1px solid #e8eef8;
+}
+.malinawa-desc-num {
+    font-size: 56px; font-weight: 700;
+    color: #e8eef8; line-height: 1;
+    flex-shrink: 0; user-select: none;
+}
+.malinawa-desc-body h4 {
+    font-size: 20px; font-weight: 700;
+    color: var(--color-primary); margin-bottom: 14px;
+}
+.malinawa-desc-body p {
+    font-size: 15px; color: #555;
+    line-height: 1.9; margin-bottom: 8px;
+}
+.malinawa-desc-body p:last-child { margin-bottom: 0; }
+
+@media (max-width: 768px) {
+    .malinawa-hero img { height: 260px; }
+    .malinawa-hero-overlay { padding: 24px 20px; }
+    .malinawa-hero-overlay h3 { font-size: 24px; }
+    .malinawa-strip { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .malinawa-strip-item img { height: 110px; }
+    .malinawa-desc { flex-direction: column; gap: 10px; padding: 22px 18px; }
+    .malinawa-desc-num { font-size: 36px; }
+}
+
+.mission-text-block {
+    background: var(--color-bg-blue);
+    border-left: 4px solid var(--color-primary);
+    border-radius: 8px;
+    padding: 28px 32px;
+}
+.mission-text-block h3 { font-size: 22px; font-weight: 700; color: var(--color-primary); margin-bottom: 16px; }
+.mission-text-block p  { font-size: 16px; color: #444; line-height: 1.9; margin-bottom: 10px; }
+.mission-text-block p:last-child { margin-bottom: 0; }
+
+@media (max-width: 768px) {
+    .malinawa-layout { grid-template-columns: 1fr; }
+    .malinawa-hero-photo, .malinawa-side-photos, .malinawa-wide-photo { grid-column: 1; grid-row: auto; }
+    .malinawa-side-photos { flex-direction: row; }
+    .malinawa-hero-photo img { height: 220px; }
+    .malinawa-wide-photo img { height: 160px; }
+    .mission-text-block { padding: 20px 18px; }
+}
+
+/* ===== BOARD ===== */
+.board-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+.year-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+.year-btn { padding: 6px 16px; border: 2px solid var(--color-primary); border-radius: 20px; background: white; color: var(--color-primary); font-size: 14px; font-weight: 600; cursor: pointer; transition: all var(--transition); }
+.year-btn.active, .year-btn:hover { background: var(--color-primary); color: white; }
+.board-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.board-table th { background: var(--color-primary); color: white; padding: 14px 20px; font-size: 15px; font-weight: 600; text-align: left; }
+.board-table td { padding: 14px 20px; font-size: 15px; color: #444; border-bottom: 1px solid #f0f0f0; }
+.board-table tr:hover td { background: #f8f9ff; }
+.board-empty { text-align: center; color: #aaa; padding: 40px; }
+
+/* ===== FOOTER ===== */
+footer { background: var(--color-primary-dark); color: #888; text-align: center; padding: 16px; font-size: 13px; }
+footer span { color: #ccc; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    header { padding: 0 16px; }
+    nav { display: none; }
+    .hamburger { display: flex; }
+    #mobile-nav { display: block; }
+    .pastor-card { flex-direction: column; align-items: center; }
+    .interior-grid { grid-template-columns: 1fr; }
+    .worship-grid { grid-template-columns: repeat(2, 1fr); }
+    .mission-block { flex-direction: column; }
+    .mission-photo { width: 100%; }
+    .sub-content { padding: 36px 20px; }
+    .hero-inner h1 { font-size: 38px; }
+    .hero-inner p { font-size: 18px; }
+    .section-hero h2 { font-size: 30px; }
+    .section-hero p { font-size: 15px; }
+    .section-title { font-size: 26px; }
+    .dept-bottom h3 { font-size: 21px; }
+    .sub-nav button { padding: 14px 16px; font-size: 14px; }
+}
